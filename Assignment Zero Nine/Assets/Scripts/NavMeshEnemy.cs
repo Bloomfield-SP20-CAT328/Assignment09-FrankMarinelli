@@ -39,7 +39,7 @@ public class NavMeshEnemy : Enemy
     override protected float MoveTowardsTarget(float speed, Vector3 target)
 	{
 		navMeshAgent.SetDestination(target);
-		return Vector3.Distance(transform.position, targert);
+		return Vector3.Distance(transform.position, target);
 	}
 
     override protected void SelectRandomPatrolPoint()
@@ -47,6 +47,6 @@ public class NavMeshEnemy : Enemy
 		int choice = Random.Range(0, navPatrolPoints.Count);
 		patrollingInterestPoint = navPatrolPoints[choice];
 		navMeshAgent.SetDestination(patrollingInterestPoint.transform.position);
-        Debug.Log("Nav Eenmy is navigating to patrol at point " + patrollingInterestPoint.name + " at this location " + patrollingInterestPoint.transform.position.ToString())
+		Debug.Log("Nav Eenmy is navigating to patrol at point " + patrollingInterestPoint.name + " at this location " + patrollingInterestPoint.transform.position.ToString());
 	}
 }

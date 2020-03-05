@@ -21,8 +21,6 @@ public class NavMeshEnemy : Enemy
 			}
 		}
 
-		GameObject hair = GameObject.Find("Hair");
-		hair.GetComponent<Renderer>().material.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
 		navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
 		ChangeToPatrolling();
@@ -48,5 +46,18 @@ public class NavMeshEnemy : Enemy
 		patrollingInterestPoint = navPatrolPoints[choice];
 		navMeshAgent.SetDestination(patrollingInterestPoint.transform.position);
 		Debug.Log("Nav Eenmy is navigating to patrol at point " + patrollingInterestPoint.name + " at this location " + patrollingInterestPoint.transform.position.ToString());
+	}
+
+    protected bool CanSee(Collider collider)
+	{
+		Vector3 targetDirection = collider.transform.position - transform.position;
+		Vector3 forward = transform.forward;
+		float angle = Vector3.Angle(targetDirection, forward);
+        if(angle < (fieldOfView / 2))
+		{
+			return true;
+		}
+
+		return false;
 	}
 }
